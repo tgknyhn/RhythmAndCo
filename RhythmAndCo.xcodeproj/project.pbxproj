@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B15126B5295B8E9E003D2840 /* RhythmAndCoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15126B4295B8E9E003D2840 /* RhythmAndCoApp.swift */; };
-		B15126B7295B8E9E003D2840 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15126B6295B8E9E003D2840 /* ContentView.swift */; };
+		B15126B7295B8E9E003D2840 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15126B6295B8E9E003D2840 /* HomeView.swift */; };
 		B15126B9295B8E9F003D2840 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B15126B8295B8E9F003D2840 /* Assets.xcassets */; };
 		B15126BC295B8E9F003D2840 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B15126BB295B8E9F003D2840 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		B15126B1295B8E9E003D2840 /* RhythmAndCo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RhythmAndCo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15126B4295B8E9E003D2840 /* RhythmAndCoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmAndCoApp.swift; sourceTree = "<group>"; };
-		B15126B6295B8E9E003D2840 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B15126B6295B8E9E003D2840 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B15126B8295B8E9F003D2840 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B15126BB295B8E9F003D2840 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,8 +51,11 @@
 		B15126B3295B8E9E003D2840 /* RhythmAndCo */ = {
 			isa = PBXGroup;
 			children = (
-				B15126B4295B8E9E003D2840 /* RhythmAndCoApp.swift */,
-				B15126B6295B8E9E003D2840 /* ContentView.swift */,
+				B15126C2295B8FED003D2840 /* App */,
+				B15126C3295B8FF4003D2840 /* Core */,
+				B15126C4295B8FF8003D2840 /* Models */,
+				B15126C6295B9025003D2840 /* Utils */,
+				B15126C7295B9037003D2840 /* Extensions */,
 				B15126B8295B8E9F003D2840 /* Assets.xcassets */,
 				B15126BA295B8E9F003D2840 /* Preview Content */,
 			);
@@ -65,6 +68,75 @@
 				B15126BB295B8E9F003D2840 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B15126C2295B8FED003D2840 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B15126B4295B8E9E003D2840 /* RhythmAndCoApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B15126C3295B8FF4003D2840 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B15126CC295B9138003D2840 /* Home */,
+				B15126CB295B9123003D2840 /* Play */,
+				B15126C8295B9063003D2840 /* Login */,
+				B15126CA295B907A003D2840 /* Register */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B15126C4295B8FF8003D2840 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B15126C6295B9025003D2840 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B15126C7295B9037003D2840 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B15126C8295B9063003D2840 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B15126CA295B907A003D2840 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		B15126CB295B9123003D2840 /* Play */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Play;
+			sourceTree = "<group>";
+		};
+		B15126CC295B9138003D2840 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B15126B6295B8E9E003D2840 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B15126B7295B8E9E003D2840 /* ContentView.swift in Sources */,
+				B15126B7295B8E9E003D2840 /* HomeView.swift in Sources */,
 				B15126B5295B8E9E003D2840 /* RhythmAndCoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

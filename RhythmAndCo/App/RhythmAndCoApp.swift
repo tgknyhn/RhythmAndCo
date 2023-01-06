@@ -27,7 +27,7 @@ struct RhythmAndCoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PlayView()
+            PlayView(fileName: "arctic", trackIndex: 1)
         }
     }
 }

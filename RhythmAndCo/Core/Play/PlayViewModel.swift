@@ -11,46 +11,20 @@ import Fretboard
  
 
 class PlayViewModel: ObservableObject {
-    @Published var nextTenNotes = [String]()
+    @Published var songNotes = [MIDINoteDuration]()      // Notes in the song
     @Published var currentNote: String = "Empty"
-    @Published var currentNoteIndex: Int = 0
-    // Audio model
+    @Published var currentNoteIndex: Int = -1
     @Published var receivedNote: String = "-"
     
-
-    
-    public var songNotes = [String]()      // Notes in the song
-    
-    
-    init() {
-        fetchSongNotes(for: "doi")
-        initNotes()
-    }
-
-    func initNotes() {
-        // Initializing current note
-        currentNote = songNotes[currentNoteIndex]
-        // Adding 10 song notes
-        for i in 0..<10 {
-            nextTenNotes.append(songNotes[i])
-        }
-    }
-    
-    func fetchSongNotes(for song: String) {
-        let fileURL : URL? = Bundle.main.url(forResource: song, withExtension: "mid")
-        var tempName: String
-
+    func fetchSongNotes(for fileURL: URL?, track: Int) {
         if let url = fileURL {
             let midiFile   = MIDIFile(url: url)
-            let midiTrack  = midiFile.tracks[0]
-            let midiEvents = midiTrack.events
+            let trackNoteMap = MIDIFileTrackNoteMap(midiFile: midiFile, trackNumber: track)
             
-            for event in midiEvents {
-                if let noteNumber = event.noteNumber {
-                    tempName = noteNumberToNoteName(for: noteNumber.description)
-                    songNotes.append(tempName)
-                }
-            }
+            debugPrint("track: \(midiFile.filename)")
+            
+            songNotes = trackNoteMap.noteList
+            nextNote()
         }
     }
     
@@ -59,10 +33,7 @@ class PlayViewModel: ObservableObject {
         if currentNoteIndex < songNotes.count - 1 {
             currentNoteIndex += 1
         }
-        currentNote = songNotes[currentNoteIndex]
-        // Changing next 5 note
-        nextTenNotes.remove(at: 0)
-        nextTenNotes.append(songNotes[currentNoteIndex+9])
+        currentNote = noteNumberToNoteName(for: songNotes[currentNoteIndex].noteNumber)
     }
 
     func compareCurrentNote(with receivedNote: String) {
@@ -70,8 +41,6 @@ class PlayViewModel: ObservableObject {
             nextNote()
         }
     }
-    
-    
     
     func getFretBoard(for note: String, with suffix: String) -> some View {
         let guitar = Instrument.guitar
@@ -81,15 +50,15 @@ class PlayViewModel: ObservableObject {
 
         
         return FretboardView(position: dAug9Positions[3])
-            .frame(width: 200, height: 400)
+            .frame(width: 200, height: 350)
             
     }
     
-    func noteNumberToNoteName(for note: String) -> String {
+    func noteNumberToNoteName(for note: Int) -> String {
         // Every note possible (A, B, ... , F#, etc)
         let allNotes = Notes()
         // First we convert note string to integer
-        var noteNumber = Int(note) ?? 0
+        var noteNumber = note
         // Then, we substract 12 from the noteNumber (A0 starts at note number 12)
         noteNumber -= 12
         // Second, we calculate the octave
@@ -98,6 +67,20 @@ class PlayViewModel: ObservableObject {
         let noteName = allNotes.getNote(for: noteNumber % 12)
         // return the result
         return noteName + String(octave);
+    }
+    
+    func getFileName(for url: URL?) -> String {
+        var fileName: String = url?.lastPathComponent ?? "Empty"
+        
+        if(fileName == "Empty") {
+            return fileName
+        }
+        
+        (1...4).forEach { _ in
+            fileName.removeLast()
+        }
+        
+        return fileName.uppercased()
     }
 }
 

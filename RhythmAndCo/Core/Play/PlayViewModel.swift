@@ -30,7 +30,7 @@ class PlayViewModel: ObservableObject {
             
             songNotes = trackNoteMap.noteList
             // Adding 5 empty note
-            (0 ..< 5).forEach({ i in songNotes.append(MIDINoteDuration.init(noteOnPosition: 0, noteOffPosition: 0, noteNumber: 0)) })
+            (0 ..< 5).forEach({ i in songNotes.append(MIDINoteDuration.init(noteOnPosition: Double(i), noteOffPosition: Double(i+1), noteNumber: 0)) })
             //nextNote()
         }
     }

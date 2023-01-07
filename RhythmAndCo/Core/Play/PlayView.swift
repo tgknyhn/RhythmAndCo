@@ -66,13 +66,20 @@ struct PlayView: View {
                                         Text(playViewModel.noteNumberToNoteName(for: noteInfo.noteNumber))
                                             .font(.title)
                                             .fontWeight(.bold)
-                                            
                                     }
                                 }
                             }
+                            .scrollDisabled(true)
+                            .onChange(of: playViewModel.currentNoteIndex) { index in
+                                withAnimation {
+                                    proxy.scrollTo(playViewModel.songNotes[index].noteStartTime, anchor: .top)
+                                }
+                            }
                         }
-                            .padding(.top, 12)
-                            .padding(.bottom, -40)
+                        .padding(.top, 12)
+                        .padding(.bottom, -40)
+                        
+                        
                         VStack {
                             Circle().stroke(Color.black,
                                             style: StrokeStyle(lineWidth: 5,
@@ -88,10 +95,10 @@ struct PlayView: View {
                     Button("Nex") {
                         playViewModel.nextNote()
                     }
-                    VStack {
-                        Text("Start Time: \(startTimeInMs)")
-                        Text("Elapsed Time: \(timeElapsedInMs)")
-                    }
+//                    VStack {
+//                        Text("Start Time: \(startTimeInMs)")
+//                        Text("Elapsed Time: \(timeElapsedInMs)")
+//                    }
                 }
                 
             }
@@ -263,9 +270,9 @@ struct MidiTrackView: View {
 
 //struct SongNotesScrollView: View {
 //    var playViewModel: PlayViewModel
-//    
+//
 //    var body: some View {
-//        
+//
 //    }
 //}
 

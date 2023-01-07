@@ -7,6 +7,7 @@
    "suffixes": [
        "major",
        "minor",
+       "1",
        "2",
        "3",
        "4",
@@ -92,6 +93,32 @@
            },
            {
                "key": "C",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "C",
+               "suffix": "2",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "C",
                "suffix": "3",
                "positions": [
                    {
@@ -142,8 +169,73 @@
                    },
                ]
            },
+           {
+               "key": "C",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "C",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "C",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
         ],
        "C#": [
+           {
+               "key": "C#",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "C#",
+               "suffix": "2",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "C#",
                "suffix": "3",
@@ -183,8 +275,87 @@
                    },
                ]
            },
+           {
+               "key": "C#",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "C#",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },           {
+               "key": "C#",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "C#",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+
+
        ],
        "D": [
+           {
+               "key": "D",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D",
+               "suffix": "2",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "D",
                "suffix": "3",
@@ -224,8 +395,86 @@
                    },
                ]
            },
+           {
+               "key": "D",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "D#": [
+           {
+               "key": "D#",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D#",
+               "suffix": "2",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "D#",
                "suffix": "3",
@@ -265,8 +514,73 @@
                    },
                ]
            },
+           {
+               "key": "D#",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D#",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D#",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "D#",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "E": [
+           {
+               "key": "E",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "E",
                "suffix": "2",
@@ -319,8 +633,73 @@
                    },
                ]
            },
+           {
+               "key": "E",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "E",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "E",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "E",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "F": [
+           {
+               "key": "F",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "F",
                "suffix": "2",
@@ -373,8 +752,73 @@
                    },
                ]
            },
+           {
+               "key": "F",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "F",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "F",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "F",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "F#": [
+           {
+               "key": "F#",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "F#",
                "suffix": "2",
@@ -414,8 +858,86 @@
                    },
                ]
            },
+           {
+               "key": "F#",
+               "suffix": "5",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "F#",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "F#",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "F#",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "F#",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "G": [
+           {
+               "key": "G",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "G",
                "suffix": "2",
@@ -455,8 +977,86 @@
                    },
                ]
            },
+           {
+               "key": "G",
+               "suffix": "5",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "G#": [
+           {
+               "key": "G#",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "G#",
                "suffix": "2",
@@ -496,8 +1096,87 @@
                    },
                ]
            },
+           {
+               "key": "G#",
+               "suffix": "5",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G#",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G#",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G#",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "G#",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+
        ],
        "A": [
+           {
+               "key": "A",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "A",
                "suffix": "2",
@@ -537,8 +1216,86 @@
                    },
                ]
            },
+           {
+               "key": "A",
+               "suffix": "5",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "A#": [
+           {
+               "key": "A#",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "A#",
                "suffix": "2",
@@ -578,8 +1335,86 @@
                    },
                ]
            },
+           {
+               "key": "A#",
+               "suffix": "5",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A#",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A#",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A#",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "A#",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
        ],
        "B": [
+           {
+               "key": "B",
+               "suffix": "1",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
            {
                "key": "B",
                "suffix": "2",
@@ -612,6 +1447,71 @@
                "positions": [
                    {
                        "frets": [ -1, -1, -1, -1, 12, 7],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "B",
+               "suffix": "5",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "B",
+               "suffix": "6",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "B",
+               "suffix": "7",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "B",
+               "suffix": "8",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
+                       "fingers": [ 0, 0, 0, 0, 0, 0 ],
+                       "baseFret": 0,
+                       "barres": [],
+                       "midi": [ 48, 51, 55, 60, 67 ]
+                   },
+               ]
+           },
+           {
+               "key": "B",
+               "suffix": "9",
+               "positions": [
+                   {
+                       "frets": [ -1, -1, -1, -1, -1, -1 ],
                        "fingers": [ 0, 0, 0, 0, 0, 0 ],
                        "baseFret": 0,
                        "barres": [],

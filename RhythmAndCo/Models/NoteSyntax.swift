@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Notes {
+struct NoteSyntax {
     let a       : String = "A"
     let a_sharp : String = "A#"
     let b       : String = "B"

@@ -9,7 +9,6 @@ import SwiftUI
 import AudioKit
 import AudioKitUI
 
-
 struct PlayView: View {
     // Initializing the viewmodels
     @StateObject var midiTrackViewModel = MIDITrackViewModel()      // From AudiokitUI
@@ -20,14 +19,16 @@ struct PlayView: View {
     @State var trackIndex: Int = 0
     @State var isPlaying = false
     @State var startTimeInMs = 0.0
-    @State var test = 0
+    @State var notePosition = Chord.Position(baseFret: 0,
+                                            barres: [],
+                                            frets: [-1, -1, -1, -1, -1, -1],
+                                            fingers: [0, 0, 0, 0, 0, 0])
     // Clock system
     @State var timeElapsedInMs = 0.0      // Shows elapsed time in millisecond
     @State var timerRunning = true
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     // Guitarboard object
     let guitar = Instrument.guitar
-    
     
     init(fileName: String, trackIndex: Int) {
         // Initializing song file
@@ -51,60 +52,75 @@ struct PlayView: View {
                 //CurrentNoteView(currentNote: playViewModel.currentNote)
                 MidiTrackView(fileURL: fileURL, trackIndex: trackIndex)
                 HStack(alignment: .top, spacing: 50) {
-                    GuitarboardView(position: guitar.findChordPositions(key: playViewModel.currentKey,
-                                                                        suffix: playViewModel.currentSuffix)[0])
+                    GuitarboardView(position: notePosition)
                     .frame(width: 200, height: 350)
                     
-                    ZStack {
-                        ScrollViewReader { proxy in
-                            ScrollView {
-                                LazyVStack(spacing: 20) {
-                                    Text("-")
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                    ForEach(playViewModel.songNotes, id: \.self.noteStartTime) { noteInfo in
-                                        Text(playViewModel.noteNumberToNoteName(for: noteInfo.noteNumber))
+                    VStack {
+                        ZStack {
+                            HStack(spacing: 5) {
+                                Image(systemName: "mic.fill")
+                                    .imageScale(.large)
+                                Text("→")
+                                Spacer()
+                            }.padding(.horizontal, -20)
+                            HStack(spacing: 10) {
+                                Spacer()
+                                Text("\(conductor.data.noteNameWithSharps)")
+                                    .font(.title)
+                                    .foregroundColor(playViewModel.getReceivedNoteColor(isPlaying: isPlaying, receivedNote: conductor.data.noteNameWithSharps))
+                            }.padding(.horizontal, -20)
+                        }
+
+                        ZStack {
+                            ScrollViewReader { proxy in
+                                ScrollView {
+                                    LazyVStack(spacing: 20) {
+                                        Text("-")
                                             .font(.title)
                                             .fontWeight(.bold)
+                                        ForEach(playViewModel.noteInfo, id: \.id) { noteInfo in
+                                            Text(playViewModel.noteNumberToNoteName(for: noteInfo.note.noteNumber))
+                                                .font(.title)
+                                                .fontWeight(.bold)
+                                        }
+                                    }
+                                }
+                                .scrollDisabled(true)
+                                .onChange(of: playViewModel.currentNoteIndex) { index in
+                                    withAnimation {
+                                        proxy.scrollTo(playViewModel.noteInfo[index].id, anchor: .top)
                                     }
                                 }
                             }
-                            .scrollDisabled(true)
-                            .onChange(of: playViewModel.currentNoteIndex) { index in
-                                withAnimation {
-                                    proxy.scrollTo(playViewModel.songNotes[index].noteStartTime, anchor: .top)
-                                }
+                            .padding(.top, 12)
+                            .padding(.bottom, -40)
+                            
+                            
+                            VStack {
+                                Circle().stroke(Color.black,
+                                                style: StrokeStyle(lineWidth: 5,
+                                                                   lineCap: .butt,
+                                                                   dash: [10,5]))
+                                Spacer()
                             }
-                        }
-                        .padding(.top, 12)
-                        .padding(.bottom, -40)
-                        
-                        
-                        VStack {
-                            Circle().stroke(Color.black,
-                                            style: StrokeStyle(lineWidth: 5,
-                                                               lineCap: .butt,
-                                                               dash: [10,5]))
-                            Spacer()
                         }
                     }
                 }
                 .padding(.trailing, geometry.size.width / 8)
 
-                HStack {
-                    Button("Nex") {
-                        playViewModel.nextNote()
-                    }
-//                    VStack {
-//                        Text("Start Time: \(startTimeInMs)")
-//                        Text("Elapsed Time: \(timeElapsedInMs)")
-//                    }
+                Button("Start") {
+                    playViewModel.nextNote()
                 }
-                
+
+                //                    VStack {
+                //                        Text("Start Time: \(startTimeInMs)")
+                //                        Text("Elapsed Time: \(timeElapsedInMs)")
+                //                    }
             }
             .padding(.horizontal)
             .padding(.bottom, 1)
             .onAppear() {
+                conductor.start()
                 // Sending info to the viewmodel to get song information
                 playViewModel.fetchSongNotes(for: fileURL, track: trackIndex)
                 // initializing the midi track viewmodel
@@ -118,7 +134,7 @@ struct PlayView: View {
             }
             .onReceive(timer, perform: { _ in
                 if playViewModel.currentNoteIndex != -1 {
-                    startTimeInMs = playViewModel.songNotes[playViewModel.currentNoteIndex].noteStartTime * 1_000_000 / 3.05
+                    startTimeInMs = playViewModel.noteInfo[playViewModel.currentNoteIndex].note.noteStartTime * 1_000_000 / 3.05
                 }
                 
                 if isPlaying == true {
@@ -141,12 +157,20 @@ struct PlayView: View {
             
             .onChange(of: playViewModel.currentNoteIndex, perform: { newValue in
                 isPlaying.toggle()
+                notePosition = guitar.findChordPositions(key: playViewModel.currentKey,
+                                                         suffix: playViewModel.currentSuffix)[0]
+            })
+            .onChange(of: conductor.data.pitch, perform: { note in
+                if isPlaying == false {
+                    playViewModel.compareCurrentNote(receivedNote: conductor.data.noteNameWithSharps)
+                }
             })
             .onDisappear(perform: {
+                conductor.stop()
                 midiTrackViewModel.stop()
                 midiTrackViewModel.stopEngine()
             })
-        .environmentObject(midiTrackViewModel)
+            .environmentObject(midiTrackViewModel)
         }
     }
     
@@ -157,16 +181,9 @@ struct PlayView: View {
 
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayView(fileName: "arctic", trackIndex: 0)
+        PlayView(fileName: "nggyu", trackIndex: 1)
     }
 }
-
-
-//            Button("Nex") {
-//                playViewModel.nextNote()
-//            }
-//            Text("\(playViewModel.songNotes.count)")
-
     
 
 struct SongNameView: View {

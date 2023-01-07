@@ -10,11 +10,11 @@ import AudioKit
  
 class PlayViewModel: ObservableObject {
     @Published var songNotes = [MIDINoteDuration]()      // Notes in the song
+    @Published var noteInfo = [NoteInfo]()
     @Published var currentNote: String = "Empty"
     @Published var currentKey: String = "C"
     @Published var currentSuffix: String = "6"
     @Published var currentNoteIndex: Int = -1
-    @Published var receivedNote: String = "-"
     
     func fetchSongNotes(for fileURL: URL?, track: Int) {
         if let url = fileURL {
@@ -32,6 +32,10 @@ class PlayViewModel: ObservableObject {
             // Adding 5 empty note
             (0 ..< 5).forEach({ i in songNotes.append(MIDINoteDuration.init(noteOnPosition: Double(i), noteOffPosition: Double(i+1), noteNumber: 0)) })
             //nextNote()
+            
+            (0 ..< songNotes.count).forEach { index in
+                noteInfo.append(NoteInfo(id: index, note: songNotes[index]))
+            }
         }
     }
     
@@ -41,7 +45,7 @@ class PlayViewModel: ObservableObject {
             currentNoteIndex += 1
         }
         
-        currentNote = noteNumberToNoteName(for: songNotes[currentNoteIndex].noteNumber)
+        currentNote = noteNumberToNoteName(for: noteInfo[currentNoteIndex].note.noteNumber)
         currentKey = getKey()
         currentSuffix = getSuffix()
     }
@@ -54,7 +58,7 @@ class PlayViewModel: ObservableObject {
         return String(currentNote.suffix(1))
     }
     
-    func compareCurrentNote(with receivedNote: String) {
+    func compareCurrentNote(receivedNote: String) {
         if currentNote == receivedNote {
             nextNote()
         }
@@ -62,8 +66,11 @@ class PlayViewModel: ObservableObject {
 
     
     func noteNumberToNoteName(for note: Int) -> String {
+        if note == 0 {
+            return " "
+        }
         // Every note possible (A, B, ... , F#, etc)
-        let allNotes = Notes()
+        let allNotes = NoteSyntax()
         // First we convert note string to integer
         var noteNumber = note
         // Then, we substract 12 from the noteNumber (A0 starts at note number 12)
@@ -88,6 +95,18 @@ class PlayViewModel: ObservableObject {
         }
         
         return fileName.uppercased()
+    }
+    
+    func getReceivedNoteColor(isPlaying: Bool, receivedNote: String) -> Color {
+        if isPlaying == true {
+            return Color.gray
+        }
+        if receivedNote == currentNote {
+            return Color.green
+        }
+        else {
+            return Color.red
+        }
     }
 }
 

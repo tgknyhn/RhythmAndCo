@@ -19,7 +19,8 @@ extension Instrument {
     public static let guitar = instrument(from: "guitar")
     
     public func findChordPositions(key: String, suffix: String) -> [Chord.Position] {
-        chords[key]?.first(where: { $0.suffix == suffix })?.positions ?? []
+        debugPrint("key: \(key) suffix: \(suffix)")
+        return chords[key]?.first(where: { $0.suffix == suffix })?.positions ?? []
     }
     
     static func instrument(from resource: String) -> Instrument {

@@ -8,7 +8,6 @@
 import SwiftUI
 import AudioKit
 import AudioKitUI
-import Fretboard
 
 
 struct PlayView: View {
@@ -20,6 +19,15 @@ struct PlayView: View {
     @State var fileURL: URL?
     @State var trackIndex: Int = 0
     @State var isPlaying = false
+    @State var startTimeInMs = 0.0
+    @State var test = 0
+    // Clock system
+    @State var timeElapsedInMs = 0.0      // Shows elapsed time in millisecond
+    @State var timerRunning = true
+    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
+    // Guitarboard object
+    let guitar = Instrument.guitar
+    
     
     init(fileName: String, trackIndex: Int) {
         // Initializing song file
@@ -40,13 +48,31 @@ struct PlayView: View {
                 Spacer(minLength: 40)
                 GameScoreView()
                 Spacer(minLength: 30)
-                CurrentNoteView(currentNote: playViewModel.currentNote)
+                //CurrentNoteView(currentNote: playViewModel.currentNote)
                 MidiTrackView(fileURL: fileURL, trackIndex: trackIndex)
-                HStack(spacing: 50) {
-                    FreatboardView(playViewModel: playViewModel)
+                HStack(alignment: .top, spacing: 50) {
+                    GuitarboardView(position: guitar.findChordPositions(key: playViewModel.currentKey,
+                                                                        suffix: playViewModel.currentSuffix)[0])
+                    .frame(width: 200, height: 350)
+                    
                     ZStack {
-                        SongNotesScrollView(playViewModel: playViewModel)
+                        ScrollViewReader { proxy in
+                            ScrollView {
+                                LazyVStack(spacing: 20) {
+                                    Text("-")
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                    ForEach(playViewModel.songNotes, id: \.self.noteStartTime) { noteInfo in
+                                        Text(playViewModel.noteNumberToNoteName(for: noteInfo.noteNumber))
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                            
+                                    }
+                                }
+                            }
+                        }
                             .padding(.top, 12)
+                            .padding(.bottom, -40)
                         VStack {
                             Circle().stroke(Color.black,
                                             style: StrokeStyle(lineWidth: 5,
@@ -57,6 +83,16 @@ struct PlayView: View {
                     }
                 }
                 .padding(.trailing, geometry.size.width / 8)
+
+                HStack {
+                    Button("Nex") {
+                        playViewModel.nextNote()
+                    }
+                    VStack {
+                        Text("Start Time: \(startTimeInMs)")
+                        Text("Elapsed Time: \(timeElapsedInMs)")
+                    }
+                }
                 
             }
             .padding(.horizontal)
@@ -71,14 +107,33 @@ struct PlayView: View {
                 }
             }
             .onTapGesture {
-                isPlaying.toggle()
+                //isPlaying.toggle()
             }
+            .onReceive(timer, perform: { _ in
+                if playViewModel.currentNoteIndex != -1 {
+                    startTimeInMs = playViewModel.songNotes[playViewModel.currentNoteIndex].noteStartTime * 1_000_000 / 3.05
+                }
+                
+                if isPlaying == true {
+                    if timeElapsedInMs <= startTimeInMs {
+                        timeElapsedInMs += 10
+                    }
+                    else {
+                        timeElapsedInMs -= 5.05
+                        isPlaying.toggle()
+                    }
+                }
+            })
             .onChange(of: isPlaying, perform: { newValue in
                 if newValue == true {
                     midiTrackViewModel.play()
                 } else {
                     midiTrackViewModel.stop()
                 }
+            })
+            
+            .onChange(of: playViewModel.currentNoteIndex, perform: { newValue in
+                isPlaying.toggle()
             })
             .onDisappear(perform: {
                 midiTrackViewModel.stop()
@@ -106,44 +161,6 @@ struct PlayView_Previews: PreviewProvider {
 //            Text("\(playViewModel.songNotes.count)")
 
     
-    /*
-    ScrollView(.horizontal) {
-        HStack {
-            ForEach(playViewModel.nextTenNotes, id: \.self) { note in
-                Text(note)
-            }
-        }
-    }
-    
-    Text(playViewModel.currentNote)
-        .font(.system(size: 50))
-    
-    Button("Next") {
-        playViewModel.nextNote()
-    }
-    Text("Note Name")
-        .bold()
-        .font(.system(size: 40))
-        .underline(true)
-    Text("")
-    Text("\(conductor.data.noteNameWithSharps)")
-        .font(.system(size: 30))
-     playViewModel.getFretBoard(for: Instrument.guitar.keys[0], with: Instrument.guitar.suffixes[2])
-    */
-//}
-//
-//        .onAppear() {
-//            conductor.start()
-//
-//        }
-//        .onDisappear() {
-//            conductor.stop()
-//        }
-//        .onChange(of: conductor.data.amplitude) { amp in
-//            guard amp > 0.3 else { return }
-//            playViewModel.compareCurrentNote(with: conductor.data.noteNameWithSharps)
-//        }
-
 
 struct SongNameView: View {
     let songName: String
@@ -244,26 +261,20 @@ struct MidiTrackView: View {
     }
 }
 
-struct SongNotesScrollView: View {
-    var playViewModel: PlayViewModel
-    
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                ForEach(playViewModel.songNotes, id: \.self.noteStartTime) { noteInfo in
-                    Text(playViewModel.noteNumberToNoteName(for: noteInfo.noteNumber))
-                        .font(.title)
-                        .fontWeight(.bold)
-                }
-            }
-        }
-    }
-}
+//struct SongNotesScrollView: View {
+//    var playViewModel: PlayViewModel
+//    
+//    var body: some View {
+//        
+//    }
+//}
 
-struct FreatboardView: View {
-    var playViewModel: PlayViewModel
-    
-    var body: some View {
-        playViewModel.getFretBoard(for: Instrument.guitar.keys[4], with: Instrument.guitar.suffixes[0])
-    }
-}
+//struct FretboardView: View {
+//    var playViewModel: PlayViewModel
+//
+//
+//    var body: some View {
+//        //Text(String(currentNote.suffix(1)))
+//
+//    }
+//}

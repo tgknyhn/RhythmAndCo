@@ -7,12 +7,12 @@
 
 import SwiftUI
 import AudioKit
-import Fretboard
  
-
 class PlayViewModel: ObservableObject {
     @Published var songNotes = [MIDINoteDuration]()      // Notes in the song
     @Published var currentNote: String = "Empty"
+    @Published var currentKey: String = "C"
+    @Published var currentSuffix: String = "6"
     @Published var currentNoteIndex: Int = -1
     @Published var receivedNote: String = "-"
     
@@ -21,38 +21,45 @@ class PlayViewModel: ObservableObject {
             let midiFile   = MIDIFile(url: url)
             let trackNoteMap = MIDIFileTrackNoteMap(midiFile: midiFile, trackNumber: track)
             
-            debugPrint("track: \(midiFile.filename)")
+            
+            debugPrint("division: \(midiFile.timeDivision)")
+            debugPrint("ticksperframe: \(midiFile.ticksPerFrame ?? 0)")
+            debugPrint("ticksperbeat: \(midiFile.ticksPerBeat ?? 0)")
+            
+            
             
             songNotes = trackNoteMap.noteList
-            nextNote()
+            // Adding 5 empty note
+            (0 ..< 5).forEach({ i in songNotes.append(MIDINoteDuration.init(noteOnPosition: 0, noteOffPosition: 0, noteNumber: 0)) })
+            //nextNote()
         }
     }
     
     func nextNote() {
         // Changing current note
-        if currentNoteIndex < songNotes.count - 1 {
+        if currentNoteIndex < songNotes.count - 6 {
             currentNoteIndex += 1
         }
+        
         currentNote = noteNumberToNoteName(for: songNotes[currentNoteIndex].noteNumber)
+        currentKey = getKey()
+        currentSuffix = getSuffix()
     }
 
+    func getKey() -> String {
+        return String(currentNote.prefix(currentNote.count-1))
+    }
+    
+    func getSuffix() -> String {
+        return String(currentNote.suffix(1))
+    }
+    
     func compareCurrentNote(with receivedNote: String) {
         if currentNote == receivedNote {
             nextNote()
         }
     }
-    
-    func getFretBoard(for note: String, with suffix: String) -> some View {
-        let guitar = Instrument.guitar
-        let dAug9Positions = guitar.findChordPositions(key: note, suffix: suffix)
-        
-        //getFretBoard(for: Instrument.guitar.keys[4], with: Instrument.guitar.suffixes[0])
 
-        
-        return FretboardView(position: dAug9Positions[3])
-            .frame(width: 200, height: 350)
-            
-    }
     
     func noteNumberToNoteName(for note: Int) -> String {
         // Every note possible (A, B, ... , F#, etc)

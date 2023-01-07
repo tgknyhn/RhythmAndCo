@@ -20,6 +20,10 @@
 		B17743D32966125300193632 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = B17743D22966125300193632 /* SoundpipeAudioKit */; };
 		B1AC17D2296719900017CA2C /* AudioKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = B1AC17D1296719900017CA2C /* AudioKitUI */; };
 		B1AC17D4296767CF0017CA2C /* arctic.mid in Resources */ = {isa = PBXBuildFile; fileRef = B1AC17D3296767CF0017CA2C /* arctic.mid */; };
+		B1C53B5E296831E80009CA74 /* GuitarboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C53B5D296831E80009CA74 /* GuitarboardView.swift */; };
+		B1C53B61296832D50009CA74 /* Chord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C53B60296832D50009CA74 /* Chord.swift */; };
+		B1C53B632968343F0009CA74 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C53B622968343F0009CA74 /* Instrument.swift */; };
+		B1C53B65296835F50009CA74 /* guitar.json in Resources */ = {isa = PBXBuildFile; fileRef = B1C53B64296835F40009CA74 /* guitar.json */; };
 		B1F7FF29295B9F8900E764C1 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7FF28295B9F8900E764C1 /* PlayViewModel.swift */; };
 		B1F7FF2B295BA56500E764C1 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7FF2A295BA56500E764C1 /* Notes.swift */; };
 		B1FEDF6D295EF8C000DDA758 /* Fretboard in Frameworks */ = {isa = PBXBuildFile; productRef = B1FEDF6C295EF8C000DDA758 /* Fretboard */; };
@@ -38,6 +42,10 @@
 		B17743CF2966113F00193632 /* AudioRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecognition.swift; sourceTree = "<group>"; };
 		B17743D42966147D00193632 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B1AC17D3296767CF0017CA2C /* arctic.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = arctic.mid; sourceTree = "<group>"; };
+		B1C53B5D296831E80009CA74 /* GuitarboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuitarboardView.swift; sourceTree = "<group>"; };
+		B1C53B60296832D50009CA74 /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
+		B1C53B622968343F0009CA74 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
+		B1C53B64296835F40009CA74 /* guitar.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = guitar.json; sourceTree = "<group>"; };
 		B1F7FF28295B9F8900E764C1 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
 		B1F7FF2A295BA56500E764C1 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +116,7 @@
 		B15126C3295B8FF4003D2840 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B1C53B5F296832580009CA74 /* Guitarboard */,
 				B15126CC295B9138003D2840 /* Home */,
 				B15126CB295B9123003D2840 /* Play */,
 				B15126C8295B9063003D2840 /* Login */,
@@ -179,6 +188,17 @@
 				B15126D2295B938F003D2840 /* doi.mid */,
 			);
 			path = "MIDI Files";
+			sourceTree = "<group>";
+		};
+		B1C53B5F296832580009CA74 /* Guitarboard */ = {
+			isa = PBXGroup;
+			children = (
+				B1C53B5D296831E80009CA74 /* GuitarboardView.swift */,
+				B1C53B60296832D50009CA74 /* Chord.swift */,
+				B1C53B622968343F0009CA74 /* Instrument.swift */,
+				B1C53B64296835F40009CA74 /* guitar.json */,
+			);
+			path = Guitarboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +273,7 @@
 			files = (
 				B1AC17D4296767CF0017CA2C /* arctic.mid in Resources */,
 				B15126E8295B9CE4003D2840 /* 4tracks.mid in Resources */,
+				B1C53B65296835F50009CA74 /* guitar.json in Resources */,
 				B15126E9295B9CE4003D2840 /* doi.mid in Resources */,
 				B15126BC295B8E9F003D2840 /* Preview Assets.xcassets in Resources */,
 				B15126E7295B9CDD003D2840 /* Demo.mid in Resources */,
@@ -269,9 +290,12 @@
 			files = (
 				B17743D02966113F00193632 /* AudioRecognition.swift in Sources */,
 				B1F7FF29295B9F8900E764C1 /* PlayViewModel.swift in Sources */,
+				B1C53B5E296831E80009CA74 /* GuitarboardView.swift in Sources */,
 				B1F7FF2B295BA56500E764C1 /* Notes.swift in Sources */,
 				B15126CE295B9304003D2840 /* PlayView.swift in Sources */,
 				B15126B7295B8E9E003D2840 /* HomeView.swift in Sources */,
+				B1C53B61296832D50009CA74 /* Chord.swift in Sources */,
+				B1C53B632968343F0009CA74 /* Instrument.swift in Sources */,
 				B15126B5295B8E9E003D2840 /* RhythmAndCoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

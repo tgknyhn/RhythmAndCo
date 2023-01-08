@@ -40,6 +40,7 @@ class AudioRecognition: ObservableObject, HasAudioEngine {
 
         guard let device = engine.inputDevice else { fatalError() }
 
+        
         initialDevice = device
 
         mic = input
@@ -48,7 +49,7 @@ class AudioRecognition: ObservableObject, HasAudioEngine {
         tappableNodeC = Fader(tappableNodeB)
         silence = Fader(tappableNodeC, gain: 0)
         engine.output = silence
-
+        
         tracker = PitchTap(mic) { pitch, amp in
             DispatchQueue.main.async {
                 self.update(pitch[0], amp[0])
@@ -59,7 +60,7 @@ class AudioRecognition: ObservableObject, HasAudioEngine {
 
     func update(_ pitch: AUValue, _ amp: AUValue) {
         // Reduces sensitivity to background noise to prevent random / fluctuating data.
-        guard amp > 0.1 else { return }
+        guard amp > 0.15 else { return }
 
         data.pitch = pitch
         data.amplitude = amp

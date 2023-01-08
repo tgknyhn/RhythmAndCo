@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AudioKit
+import AVFoundation
  
 class PlayViewModel: ObservableObject {
     @Published var songNotes = [MIDINoteDuration]()      // Notes in the song
@@ -15,6 +16,7 @@ class PlayViewModel: ObservableObject {
     @Published var currentKey: String = "C"
     @Published var currentSuffix: String = "6"
     @Published var currentNoteIndex: Int = -1
+    @Published var textColor:  Color = Color.black
     
     func fetchSongNotes(for fileURL: URL?, track: Int) {
         if let url = fileURL {
@@ -34,7 +36,7 @@ class PlayViewModel: ObservableObject {
             //nextNote()
             
             (0 ..< songNotes.count).forEach { index in
-                noteInfo.append(NoteInfo(id: index, note: songNotes[index]))
+                noteInfo.append(NoteInfo(id: index, note: songNotes[index], noteName: noteNumberToNoteName(for: songNotes[index].noteNumber)))
             }
         }
     }
@@ -80,6 +82,7 @@ class PlayViewModel: ObservableObject {
         // Lastly, we get note name from Notes model
         let noteName = allNotes.getNote(for: noteNumber % 12)
         // return the result
+        print("noteNo: \(note) | noteName: \(noteName + String(octave))")
         return noteName + String(octave);
     }
     
@@ -97,16 +100,41 @@ class PlayViewModel: ObservableObject {
         return fileName.uppercased()
     }
     
-    func getReceivedNoteColor(isPlaying: Bool, receivedNote: String) -> Color {
+    func getReceivedNoteColor(isPlaying: Bool, receivedNote: String) {
         if isPlaying == true {
-            return Color.gray
+            return textColor = Color.gray
         }
         if receivedNote == currentNote {
-            return Color.green
+            return textColor = Color.green
         }
         else {
-            return Color.red
+            return textColor = Color.red
         }
+    }
+
+    
+    func fetchDownloadsFolderURL() -> String {
+        let fileManager = FileManager.default
+        guard let downloadsURL = fileManager.urls(for: .allApplicationsDirectory, in: .userDomainMask).first else { return "aaa" }
+        var fileURLs = [URL]()
+        
+        do {
+            fileURLs = try fileManager.contentsOfDirectory(at: downloadsURL, includingPropertiesForKeys: nil)
+            // fileURLs is an array of URLs of the files in the downloaded files folder
+            
+        } catch {
+            print("Error while enumerating files: \(error.localizedDescription)")
+        }
+        
+        return fileURLs.description
+        
+//        do {
+//            let fileNames = try fileManager.subpathsOfDirectory(atPath: downloadsURL.path)
+//            // fileNames is an array of the names of the files in the downloaded files folder
+//            return fileNames[0]
+//        } catch {
+//            return "Errorrrr while enumerating files: \(error.localizedDescription)"
+//        }
     }
 }
 

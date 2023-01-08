@@ -11,9 +11,11 @@ import AudioKit
 struct NoteInfo {
     public let id: Int
     public let note: MIDINoteDuration
+    public let noteName: String
     
-    init(id: Int, note: MIDINoteDuration) {
+    init(id: Int, note: MIDINoteDuration, noteName: String) {
         self.id = id
         self.note = note
+        self.noteName = noteName
     }
 }

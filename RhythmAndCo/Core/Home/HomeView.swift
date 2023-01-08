@@ -6,41 +6,23 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct HomeView: View {
-    @Namespace var topID
-    @Namespace var bottomID
-
+    var playViewModel = PlayViewModel()
+    @State var result: String = "hi"
+    
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                Button("Scroll to Bottom") {
-                    withAnimation {
-                        proxy.scrollTo(bottomID)
-                    }
-                }
-                .id(topID)
-
-                VStack(spacing: 0) {
-                    ForEach(0..<100) { i in
-                        color(fraction: Double(i) / 100)
-                            .frame(height: 32)
-                    }
-                }
-
-                Button("Top") {
-                    withAnimation {
-                        proxy.scrollTo(topID)
-                    }
-                }
-                .id(bottomID)
+        VStack {
+            Text(result)
+            Button {
+                result = playViewModel.fetchDownloadsFolderURL()
+            } label: {
+                Text("click")
             }
         }
     }
 
-    func color(fraction: Double) -> Color {
-        Color(red: fraction, green: 1 - fraction, blue: 0.5)
-    }
 }
 
 struct HomeView_Previews: PreviewProvider {

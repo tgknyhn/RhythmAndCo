@@ -67,7 +67,7 @@ struct PlayView: View {
                                 Spacer()
                                 Text("\(conductor.data.noteNameWithSharps)")
                                     .font(.title)
-                                    .foregroundColor(playViewModel.getReceivedNoteColor(isPlaying: isPlaying, receivedNote: conductor.data.noteNameWithSharps))
+                                    .foregroundColor(playViewModel.textColor)
                             }.padding(.horizontal, -20)
                         }
 
@@ -79,7 +79,7 @@ struct PlayView: View {
                                             .font(.title)
                                             .fontWeight(.bold)
                                         ForEach(playViewModel.noteInfo, id: \.id) { noteInfo in
-                                            Text(playViewModel.noteNumberToNoteName(for: noteInfo.note.noteNumber))
+                                            Text(noteInfo.noteName)
                                                 .font(.title)
                                                 .fontWeight(.bold)
                                         }
@@ -163,6 +163,7 @@ struct PlayView: View {
             .onChange(of: conductor.data.pitch, perform: { note in
                 if isPlaying == false {
                     playViewModel.compareCurrentNote(receivedNote: conductor.data.noteNameWithSharps)
+                    playViewModel.getReceivedNoteColor(isPlaying: isPlaying, receivedNote: conductor.data.noteNameWithSharps)
                 }
             })
             .onDisappear(perform: {
@@ -181,7 +182,7 @@ struct PlayView: View {
 
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayView(fileName: "nggyu", trackIndex: 1)
+        PlayView(fileName: "arctic", trackIndex: 1)
     }
 }
     

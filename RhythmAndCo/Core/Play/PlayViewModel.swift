@@ -115,19 +115,11 @@ class PlayViewModel: ObservableObject {
     
     func fetchDownloadsFolderURL() -> String {
         let fileManager = FileManager.default
-        guard let downloadsURL = fileManager.urls(for: .allApplicationsDirectory, in: .userDomainMask).first else { return "aaa" }
+        guard let downloadsURL = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask).first else { return "aaa" }
         var fileURLs = [URL]()
         
-        do {
-            fileURLs = try fileManager.contentsOfDirectory(at: downloadsURL, includingPropertiesForKeys: nil)
-            // fileURLs is an array of URLs of the files in the downloaded files folder
-            
-        } catch {
-            print("Error while enumerating files: \(error.localizedDescription)")
-        }
         
-        return fileURLs.description
-        
+        return downloadsURL.description
 //        do {
 //            let fileNames = try fileManager.subpathsOfDirectory(atPath: downloadsURL.path)
 //            // fileNames is an array of the names of the files in the downloaded files folder

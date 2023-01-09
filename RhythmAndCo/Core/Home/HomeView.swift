@@ -9,20 +9,29 @@ import SwiftUI
 import Foundation
 
 struct HomeView: View {
-    var playViewModel = PlayViewModel()
-    @State var result: String = "hi"
+    @State private var showActionSheet = false
+    @State private var fileURL: URL?
     
     var body: some View {
-        VStack {
-            Text(result)
-            Button {
-                result = playViewModel.fetchDownloadsFolderURL()
-            } label: {
-                Text("click")
+        NavigationView {
+            VStack {
+                NavigationLink(destination: PlayView(fileURL: fileURL, trackIndex: 0)) {
+                    Text("hey")
+                }
+                Button("Press") {
+                    showActionSheet = true
+                }
+                .fileImporter(isPresented: $showActionSheet, allowedContentTypes: [.data]) { (res) in
+                    print("!!!\(res)")
+                    do {
+                        try fileURL = res.get()
+                    } catch {
+                        
+                    }
+                }
             }
         }
     }
-
 }
 
 struct HomeView_Previews: PreviewProvider {

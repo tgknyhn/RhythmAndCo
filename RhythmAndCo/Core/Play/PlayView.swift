@@ -30,9 +30,9 @@ struct PlayView: View {
     // Guitarboard object
     let guitar = Instrument.guitar
     
-    init(fileName: String, trackIndex: Int) {
+    init(fileURL: URL?, trackIndex: Int) {
         // Initializing song file
-        _fileURL    = State(initialValue: Bundle.main.url(forResource: fileName, withExtension: "mid")!)
+        _fileURL    = State(initialValue: fileURL)
         _trackIndex = State(initialValue: trackIndex)
     }
     
@@ -182,7 +182,7 @@ struct PlayView: View {
 
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayView(fileName: "arctic", trackIndex: 1)
+        HomeView()
     }
 }
     

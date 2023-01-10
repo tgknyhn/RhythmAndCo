@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B14DCD0A296DE8DA00008321 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DCD09296DE8DA00008321 /* Text.swift */; };
+		B14DCD0C296DEBF700008321 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DCD0B296DEBF700008321 /* Button.swift */; };
 		B15126B5295B8E9E003D2840 /* RhythmAndCoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15126B4295B8E9E003D2840 /* RhythmAndCoApp.swift */; };
 		B15126B7295B8E9E003D2840 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15126B6295B8E9E003D2840 /* HomeView.swift */; };
 		B15126B9295B8E9F003D2840 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B15126B8295B8E9F003D2840 /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B14DCD09296DE8DA00008321 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		B14DCD0B296DEBF700008321 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		B15126B1295B8E9E003D2840 /* RhythmAndCo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RhythmAndCo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15126B4295B8E9E003D2840 /* RhythmAndCoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmAndCoApp.swift; sourceTree = "<group>"; };
 		B15126B6295B8E9E003D2840 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -124,8 +128,6 @@
 				B1C53B5F296832580009CA74 /* Guitarboard */,
 				B15126CC295B9138003D2840 /* Home */,
 				B15126CB295B9123003D2840 /* Play */,
-				B15126C8295B9063003D2840 /* Login */,
-				B15126CA295B907A003D2840 /* Register */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -149,22 +151,10 @@
 		B15126C7295B9037003D2840 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B14DCD09296DE8DA00008321 /* Text.swift */,
+				B14DCD0B296DEBF700008321 /* Button.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		B15126C8295B9063003D2840 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		B15126CA295B907A003D2840 /* Register */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Register;
 			sourceTree = "<group>";
 		};
 		B15126CB295B9123003D2840 /* Play */ = {
@@ -302,6 +292,8 @@
 				B15126CE295B9304003D2840 /* PlayView.swift in Sources */,
 				B15126B7295B8E9E003D2840 /* HomeView.swift in Sources */,
 				B1C53B61296832D50009CA74 /* Chord.swift in Sources */,
+				B14DCD0C296DEBF700008321 /* Button.swift in Sources */,
+				B14DCD0A296DE8DA00008321 /* Text.swift in Sources */,
 				B1C53B692969F25B0009CA74 /* NoteInfo.swift in Sources */,
 				B1C53B632968343F0009CA74 /* Instrument.swift in Sources */,
 				B15126B5295B8E9E003D2840 /* RhythmAndCoApp.swift in Sources */,

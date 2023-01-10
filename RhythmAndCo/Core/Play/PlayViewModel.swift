@@ -111,22 +111,5 @@ class PlayViewModel: ObservableObject {
             return textColor = Color.red
         }
     }
-
-    
-    func fetchDownloadsFolderURL() -> String {
-        let fileManager = FileManager.default
-        guard let downloadsURL = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask).first else { return "aaa" }
-        var fileURLs = [URL]()
-        
-        
-        return downloadsURL.description
-//        do {
-//            let fileNames = try fileManager.subpathsOfDirectory(atPath: downloadsURL.path)
-//            // fileNames is an array of the names of the files in the downloaded files folder
-//            return fileNames[0]
-//        } catch {
-//            return "Errorrrr while enumerating files: \(error.localizedDescription)"
-//        }
-    }
 }
 

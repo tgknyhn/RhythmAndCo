@@ -173,6 +173,7 @@ struct PlayView: View {
             })
             .environmentObject(midiTrackViewModel)
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     

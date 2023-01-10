@@ -20,6 +20,7 @@
 		B15126E9295B9CE4003D2840 /* doi.mid in Resources */ = {isa = PBXBuildFile; fileRef = B15126D2295B938F003D2840 /* doi.mid */; };
 		B17743D02966113F00193632 /* AudioRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17743CF2966113F00193632 /* AudioRecognition.swift */; };
 		B17743D32966125300193632 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = B17743D22966125300193632 /* SoundpipeAudioKit */; };
+		B184A958296E236E005F371E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B184A957296E236E005F371E /* HomeViewModel.swift */; };
 		B1AC17D2296719900017CA2C /* AudioKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = B1AC17D1296719900017CA2C /* AudioKitUI */; };
 		B1AC17D4296767CF0017CA2C /* arctic.mid in Resources */ = {isa = PBXBuildFile; fileRef = B1AC17D3296767CF0017CA2C /* arctic.mid */; };
 		B1C53B5E296831E80009CA74 /* GuitarboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C53B5D296831E80009CA74 /* GuitarboardView.swift */; };
@@ -47,6 +48,7 @@
 		B15126E6295B9CDD003D2840 /* Demo.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = Demo.mid; sourceTree = "<group>"; };
 		B17743CF2966113F00193632 /* AudioRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecognition.swift; sourceTree = "<group>"; };
 		B17743D42966147D00193632 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B184A957296E236E005F371E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B1AC17D3296767CF0017CA2C /* arctic.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = arctic.mid; sourceTree = "<group>"; };
 		B1C53B5D296831E80009CA74 /* GuitarboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuitarboardView.swift; sourceTree = "<group>"; };
 		B1C53B60296832D50009CA74 /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				B15126B6295B8E9E003D2840 /* HomeView.swift */,
+				B184A957296E236E005F371E /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				B15126B7295B8E9E003D2840 /* HomeView.swift in Sources */,
 				B1C53B61296832D50009CA74 /* Chord.swift in Sources */,
 				B14DCD0C296DEBF700008321 /* Button.swift in Sources */,
+				B184A958296E236E005F371E /* HomeViewModel.swift in Sources */,
 				B14DCD0A296DE8DA00008321 /* Text.swift in Sources */,
 				B1C53B692969F25B0009CA74 /* NoteInfo.swift in Sources */,
 				B1C53B632968343F0009CA74 /* Instrument.swift in Sources */,

@@ -113,29 +113,57 @@ public struct GuitarboardView: View {
     }
     
     private func setupStrings(with proxy: GeometryProxy) -> some View {
-        VStack {
-            HStack(spacing: gridWidth(for: proxy) / 1.45) {
-                Text("E")
-                Text("A")
-                Text("D")
-                Text("G")
-                Text("B")
-                Text("E")
-            }
-            HStack(spacing: gridWidth(for: proxy)) {
-                ForEach(frets, id: \.self) { s in
-                    Group {
-                        if s >= 0 {
-                            Color.primary
-                        } else {
-                            Color.gray
-                        }
-                    }
-                    .frame(width: 1,
-                           height: gridHeight(for: proxy) * CGFloat(fretLineCount - 1) + CGFloat(frets.count))
+        ZStack {
+            Circle()
+                .frame(width: proxy.size.width / 15)
+                .foregroundColor(.gray.opacity(0.3))
+                .padding(.top, -proxy.size.height / 3.4)
+            Circle()
+                .frame(width: proxy.size.width / 15)
+                .foregroundColor(.gray.opacity(0.3))
+                .padding(.top, -proxy.size.height / 6.4)
+            Circle()
+                .frame(width: proxy.size.width / 15)
+                .foregroundColor(.gray.opacity(0.3))
+            Circle()
+                .frame(width: proxy.size.width / 15)
+                .foregroundColor(.gray.opacity(0.3))
+                .padding(.top, proxy.size.height / 3.55)
+            Circle()
+                .frame(width: proxy.size.width / 15)
+                .foregroundColor(.gray.opacity(0.3))
+                .padding(.top, proxy.size.height / 1.435)
+                .padding(.trailing, proxy.size.width / 3.4)
+            Circle()
+                .frame(width: proxy.size.width / 15)
+                .foregroundColor(.gray.opacity(0.3))
+                .padding(.top, proxy.size.height / 1.435)
+                .padding(.leading, proxy.size.width / 3.4)
+            
+            VStack {
+                HStack(spacing: gridWidth(for: proxy) / 1.45) {
+                    Text("E")
+                    Text("A")
+                    Text("D")
+                    Text("G")
+                    Text("B")
+                    Text("E")
                 }
-            }
-        }.padding(.bottom, 30)
+                HStack(spacing: gridWidth(for: proxy)) {
+                    ForEach(frets, id: \.self) { s in
+                        Group {
+                            if s >= 0 {
+                                Color.primary
+                            } else {
+                                Color.gray
+                            }
+                        }
+                        .frame(width: 1,
+                               height: gridHeight(for: proxy) * CGFloat(fretLineCount - 1) + CGFloat(frets.count))
+                    }
+                }
+            }.padding(.bottom, 30)
+        }
     }
     
     private func setupStringOverlay(at index: Int, with proxy: GeometryProxy) -> some View {

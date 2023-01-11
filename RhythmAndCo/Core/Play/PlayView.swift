@@ -29,10 +29,21 @@ struct PlayView: View {
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     // Guitarboard object
     let guitar = Instrument.guitar
+    // Score variables
+    @State var correct: Int = 0
+    @State var misplay: Int = 0
+
+    
     
     init(fileURL: URL?, trackIndex: Int) {
         // Initializing song file
         _fileURL    = State(initialValue: fileURL)
+        _trackIndex = State(initialValue: trackIndex)
+    }
+    
+    init(fileName: String, trackIndex: Int) {
+        // Initializing song file
+        _fileURL    = State(initialValue: Bundle.main.url(forResource: fileName, withExtension: "mid"))
         _trackIndex = State(initialValue: trackIndex)
     }
     
@@ -47,7 +58,7 @@ struct PlayView: View {
                     }
                 }
                 Spacer(minLength: 40)
-                GameScoreView()
+                GameScoreView(correct: correct, misplay: misplay)
                 Spacer(minLength: 30)
                 //CurrentNoteView(currentNote: playViewModel.currentNote)
                 MidiTrackView(fileURL: fileURL, trackIndex: trackIndex)
@@ -108,7 +119,7 @@ struct PlayView: View {
                 }
                 .padding(.trailing, geometry.size.width / 8)
 
-                Button("Start") {
+                Button("Next") {
                     playViewModel.nextNote()
                 }
 
@@ -164,6 +175,13 @@ struct PlayView: View {
                 if isPlaying == false {
                     playViewModel.compareCurrentNote(receivedNote: conductor.data.noteNameWithSharps)
                     playViewModel.getReceivedNoteColor(isPlaying: isPlaying, receivedNote: conductor.data.noteNameWithSharps)
+                    
+                    if playViewModel.textColor == Color.red {
+                        misplay += 1
+                    }
+                    else if playViewModel.textColor == Color.green {
+                        correct += 1
+                    }
                 }
             })
             .onDisappear(perform: {
@@ -183,7 +201,7 @@ struct PlayView: View {
 
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        PlayView(fileName: "arctic", trackIndex: 0)
     }
 }
     
@@ -214,9 +232,8 @@ struct PauseButtonView: View {
 }
 
 struct GameScoreView: View {
-    var correct: Int = 0
-    var score: Int = 0
-    var misplay: Int = 0
+    var correct: Int
+    var misplay: Int
     
     var body: some View {
         HStack {
@@ -229,17 +246,6 @@ struct GameScoreView: View {
                 Text("\(correct)")
                     .font(.headline)
                     .foregroundColor(.green)
-            }
-            
-            Spacer()
-            VStack(spacing: 5) {
-                Text("Score")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .underline()
-                Text("\(score)")
-                    .font(.headline)
-                    .foregroundColor(.yellow)
             }
             
             Spacer()

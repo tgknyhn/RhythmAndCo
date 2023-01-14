@@ -32,7 +32,8 @@ struct PlayView: View {
     // Score variables
     @State var correct: Int = 0
     @State var misplay: Int = 0
-
+    // Buttin variables
+    @State var gameStarted: Bool = false
     
     
     init(fileURL: URL?, trackIndex: Int) {
@@ -119,10 +120,35 @@ struct PlayView: View {
                 }
                 .padding(.trailing, geometry.size.width / 8)
 
-                Button("Next") {
-                    playViewModel.nextNote()
+                HStack(spacing: geometry.size.width / 10) {
+                    Button("Stop") {
+                        // Stopping every view model object
+                        conductor.stop()
+                        isPlaying.toggle()
+                        // Changing the game started value to false
+                        gameStarted = false
+                    }
+                    .disabled(gameStarted == false)
+                    Button("Start") {
+                        // Starting everthing back on
+                        conductor.start()
+                        if playViewModel.currentNoteIndex == -1 {
+                            playViewModel.nextNote()
+                        }
+                        else {
+                            isPlaying.toggle()
+                        }
+                        // Changing the game started value to true
+                        gameStarted = true
+                    }
+                    .disabled(gameStarted == true)
+                    Button("Reset") {
+                        playViewModel.nextNote()
+                    }
+                    Button("Home") {
+                        playViewModel.nextNote()
+                    }
                 }
-
                 //                    VStack {
                 //                        Text("Start Time: \(startTimeInMs)")
                 //                        Text("Elapsed Time: \(timeElapsedInMs)")

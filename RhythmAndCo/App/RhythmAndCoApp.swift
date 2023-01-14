@@ -28,7 +28,13 @@ struct RhythmAndCoApp: App {
     var body: some Scene {
         WindowGroup {
             //PlayView(fileName: "arctic", trackIndex: 0)
-            HomeView()
+            ContentView()
         }
     }
+}
+
+// Define routes of the app
+enum AppRoute: Equatable {
+    case Home
+    case Play(fileURL: URL?, trackIndex: Int)  // Typesafe parameters
 }

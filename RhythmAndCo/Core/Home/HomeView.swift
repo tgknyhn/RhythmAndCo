@@ -7,8 +7,12 @@
 
 import SwiftUI
 import Foundation
+import UIPilot
 
 struct HomeView: View {
+    // Routing object
+    @EnvironmentObject var pilot: UIPilot<AppRoute>
+    // Viewmodel
     @StateObject var homeViewModel = HomeViewModel()
     
     @State private var showActionSheet = false
@@ -18,139 +22,147 @@ struct HomeView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            NavigationView {
-                VStack(alignment: .center) {
-                    Image("AppLogo")
+            VStack(alignment: .center) {
+                Image("AppLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: proxy.size.width / 2)
+                    .padding(.top, -30)
+                
+                Group {
+                    Image("MidiFileLogo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: proxy.size.width / 2)
-                        .padding(.top, -30)
+                        .frame(width: proxy.size.width / 6)
                     
-                    Group {
-                        Image("MidiFileLogo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: proxy.size.width / 6)
-                        
-                        Text("Upload a Song")
-                            .titleTextView()
-                        
-                        Text("First you need to upload the song you want to play in .mid format")
-                            .infoTextView()
+                    Text("Upload a Song")
+                        .titleTextView()
+                    
+                    Text("First you need to upload the song you want to play in .mid format")
+                        .infoTextView()
 
+                    Button {
+                        showActionSheet = true
+                    } label: {
+                        Text("Upload")
+                            .buttonTextView()
+                    }
+                    .buttonStyle(MainButton(buttonColor: Color("LogoOrange")))
+                    .fileImporter(isPresented: $showActionSheet, allowedContentTypes: [.data]) { (res) in
+                        do {
+                            try fileURL = res.get()
+                            homeViewModel.fetchTracks(for: fileURL)
+                            fileName = fileURL?.lastPathComponent ?? "Error occured while getting file name."
+                        } catch {
+                            fileName = "Couldn't find the file."
+                        }
+                    }
+                    
+                    HStack {
+                        
+                        Text("Selected file: ")
+                            .selectedItemTextView()
+                            .fontWeight(.bold)
+                            .padding(.trailing, -8)
+                        
+                        Text(fileName)
+                            .selectedItemTextView()
+                    }
+                }
+                Spacer()
+                Group {
+                    Image("TrackLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: proxy.size.width / 6)
+                    
+                    Text("Choose the Track")
+                        .titleTextView()
+                    
+                    Text("Songs have different tracks for each instrument. Here you can select which one you want to play")
+                        .infoTextView()
+                    
+                    ZStack {
                         Button {
-                            showActionSheet = true
+                            
                         } label: {
-                            Text("Upload")
+                            Text(" ")
                                 .buttonTextView()
                         }
                         .buttonStyle(MainButton(buttonColor: Color("LogoOrange")))
-                        .fileImporter(isPresented: $showActionSheet, allowedContentTypes: [.data]) { (res) in
-                            do {
-                                try fileURL = res.get()
-                                homeViewModel.fetchTracks(for: fileURL)
-                                fileName = fileURL?.lastPathComponent ?? "Error occured while getting file name."
-                            } catch {
-                                fileName = "Couldn't find the file."
-                            }
-                        }
                         
-                        HStack {
                             
-                            Text("Selected file: ")
-                                .selectedItemTextView()
-                                .fontWeight(.bold)
-                                .padding(.trailing, -8)
-                            
-                            Text(fileName)
-                                .selectedItemTextView()
-                        }
-                    }
-                    Spacer()
-                    Group {
-                        Image("TrackLogo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: proxy.size.width / 6)
-                        
-                        Text("Choose the Track")
-                            .titleTextView()
-                        
-                        Text("Songs have different tracks for each instrument. Here you can select which one you want to play")
-                            .infoTextView()
-                        
-                        ZStack {
-                            Button {
-                                
-                            } label: {
-                                Text(" ")
-                                    .buttonTextView()
-                            }
-                            .buttonStyle(MainButton(buttonColor: Color("LogoOrange")))
-                            
-                                
-                            Menu {
-                                ForEach(0 ..< homeViewModel.tracks.count, id: \.self) { index in
-                                    Button {
-                                        trackIndex = index
-                                    } label: {
-                                        Text("Track \(index+1): \(homeViewModel.tracks[index].name ?? "no name")") +
-                                        Text("\nNote Count: \(homeViewModel.tracks[index].events.count)")
-                                    }
+                        Menu {
+                            ForEach(0 ..< homeViewModel.tracks.count, id: \.self) { index in
+                                Button {
+                                    trackIndex = index
+                                } label: {
+                                    Text("Track \(index+1): \(homeViewModel.tracks[index].name ?? "no name")") +
+                                    Text("\nNote Count: \(homeViewModel.tracks[index].events.count)")
                                 }
-                            } label: {
-                                Text("Select")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
                             }
-                            .disabled(fileName == "No file selected")
-
-                            
+                        } label: {
+                            Text("Select")
+                                .font(.headline)
+                                .foregroundColor(.white)
                         }
+                        .disabled(fileName == "No file selected")
+
                         
-                        Text("(Selecting a guitar track is suggested)")
-                            .hintTextView()
-                            
+                    }
+                    
+                    Text("(Selecting a guitar track is suggested)")
+                        .hintTextView()
                         
-                        HStack {
-                            Text("Selected track: ")
+                    
+                    HStack {
+                        Text("Selected track: ")
+                            .selectedItemTextView()
+                            .fontWeight(.bold)
+                            .padding(.trailing, -8)
+                            .padding(.top, 1)
+                        
+                        if fileName == "No file selected" {
+                            Text("First select a file")
                                 .selectedItemTextView()
-                                .fontWeight(.bold)
-                                .padding(.trailing, -8)
-                                .padding(.top, 1)
-                            
-                            if fileName == "No file selected" {
-                                Text("First select a file")
-                                    .selectedItemTextView()
-                            }
-                            else if trackIndex == -1 {
-                                Text("Select a track")
-                                    .selectedItemTextView()
-                            }
-                            else {
-                                Text("\(homeViewModel.tracks[trackIndex].name ?? String(trackIndex))")
-                                    .selectedItemTextView()
-                            }
+                        }
+                        else if trackIndex == -1 {
+                            Text("Select a track")
+                                .selectedItemTextView()
+                        }
+                        else {
+                            Text("\(homeViewModel.tracks[trackIndex].name ?? String(trackIndex))")
+                                .selectedItemTextView()
                         }
                     }
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: PlayView(fileURL: fileURL, trackIndex: 0)) {
-                        Text("Play")
-                            .buttonTextView()
-                    }
-                    .buttonStyle(MainButton(buttonColor: Color("LogoBlack")))
-                    .disabled(trackIndex < 0)
+                }
+                
+                Spacer()
+                
+                Button {
+                    pilot.push(.Play(fileURL: fileURL, trackIndex: trackIndex))
+                } label: {
+                    Text("Play")
+                        .buttonTextView()
+                }
+                .buttonStyle(MainButton(buttonColor: Color("LogoBlack")))
+                .disabled(trackIndex < 0)
+                
+                //NavigationLink(destination: PlayView(fileURL: fileURL, trackIndex: 0)) {
+                //    Text("Play")
+                //        .buttonTextView()
+                //}
+                //.buttonStyle(MainButton(buttonColor: Color("LogoBlack")))
+                //.disabled(trackIndex < 0)
 
-                }
-                .padding()
-                .onChange(of: fileName) { _ in
-                    print("count: \(homeViewModel.tracks.count)")
-                }
             }
-        }
+            .padding()
+            .onChange(of: fileName) { _ in
+                print("count: \(homeViewModel.tracks.count)")
+            }
+        }.navigationBarHidden(true)
     }
+        
 }
 
 struct HomeView_Previews: PreviewProvider {

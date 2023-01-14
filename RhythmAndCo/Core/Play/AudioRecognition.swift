@@ -19,7 +19,11 @@ struct TunerData {
 
 class AudioRecognition: ObservableObject, HasAudioEngine {
     @Published var data = TunerData()
-
+    
+    //var buffer = [0, 0, 0, 0, 0]
+    var mean = 0.0
+    var index = 0
+    
     let engine = AudioEngine()
     let initialDevice: Device
 
@@ -39,7 +43,6 @@ class AudioRecognition: ObservableObject, HasAudioEngine {
         guard let input = engine.input else { fatalError() }
 
         guard let device = engine.inputDevice else { fatalError() }
-
         
         initialDevice = device
 
@@ -65,6 +68,10 @@ class AudioRecognition: ObservableObject, HasAudioEngine {
         data.pitch = pitch
         data.amplitude = amp
 
+        
+        mean = 0
+        index = 0
+        
         var frequency = pitch
         while frequency > Float(noteFrequencies[noteFrequencies.count - 1]) {
             frequency /= 2.0

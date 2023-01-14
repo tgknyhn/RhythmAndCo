@@ -8,8 +8,12 @@
 import SwiftUI
 import AudioKit
 import AudioKitUI
+import UIPilot
+import PopupView
 
 struct PlayView: View {
+    // Routing object
+    @EnvironmentObject var pilot: UIPilot<AppRoute>
     // Initializing the viewmodels
     @StateObject var midiTrackViewModel = MIDITrackViewModel()      // From AudiokitUI
     @StateObject var conductor = AudioRecognition()                 // From Audiokit
@@ -32,9 +36,13 @@ struct PlayView: View {
     // Score variables
     @State var correct: Int = 0
     @State var misplay: Int = 0
-    // Buttin variables
+    @State var scored: Bool = false
+    // Button variables
     @State var gameStarted: Bool = false
-    
+    // Pop-up View
+    @State var showPopUp: Bool = false
+    // Scroll view scrollable
+    @State var scrollDisabled: Bool = true
     
     init(fileURL: URL?, trackIndex: Int) {
         // Initializing song file
@@ -51,13 +59,8 @@ struct PlayView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                ZStack {
-                    SongNameView(songName: playViewModel.getFileName(for: fileURL))
-                    HStack {
-                        Spacer()
-                        PauseButtonView()
-                    }
-                }
+                SongNameView(songName: playViewModel.getFileName(for: fileURL))
+                    .padding(.bottom, -10)
                 Spacer(minLength: 40)
                 GameScoreView(correct: correct, misplay: misplay)
                 Spacer(minLength: 30)
@@ -86,7 +89,7 @@ struct PlayView: View {
                         ZStack {
                             ScrollViewReader { proxy in
                                 ScrollView {
-                                    LazyVStack(spacing: 20) {
+                                    VStack(spacing: 20) {
                                         Text("-")
                                             .font(.title)
                                             .fontWeight(.bold)
@@ -94,10 +97,11 @@ struct PlayView: View {
                                             Text(noteInfo.noteName)
                                                 .font(.title)
                                                 .fontWeight(.bold)
+                                                .foregroundColor(playViewModel.textColors[noteInfo.id])
                                         }
                                     }
                                 }
-                                .scrollDisabled(true)
+                                .scrollDisabled(scrollDisabled)
                                 .onChange(of: playViewModel.currentNoteIndex) { index in
                                     withAnimation {
                                         proxy.scrollTo(playViewModel.noteInfo[index].id, anchor: .top)
@@ -120,16 +124,24 @@ struct PlayView: View {
                 }
                 .padding(.trailing, geometry.size.width / 8)
 
-                HStack(spacing: geometry.size.width / 10) {
-                    Button("Stop") {
+                HStack(spacing: geometry.size.width / 5.8) {
+                    Button {
                         // Stopping every view model object
                         conductor.stop()
                         isPlaying.toggle()
                         // Changing the game started value to false
                         gameStarted = false
+                    } label: {
+                        Image(systemName: "pause.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geometry.size.width / 18)
+                            .foregroundColor(gameStarted ? .black : .gray)
                     }
+
                     .disabled(gameStarted == false)
-                    Button("Start") {
+                    
+                    Button {
                         // Starting everthing back on
                         conductor.start()
                         if playViewModel.currentNoteIndex == -1 {
@@ -140,20 +152,43 @@ struct PlayView: View {
                         }
                         // Changing the game started value to true
                         gameStarted = true
+                    } label: {
+                        Image(systemName: "play.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geometry.size.width / 17)
+                            .foregroundColor(!gameStarted ? .black : .gray)
                     }
                     .disabled(gameStarted == true)
-                    Button("Reset") {
-                        playViewModel.nextNote()
+                    
+                    Button {
+                        pilot.push(.Play(fileURL: fileURL, trackIndex: trackIndex))
+                    } label: {
+                        Image(systemName: "arrow.counterclockwise")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geometry.size.width / 15)
+                            .foregroundColor(.black)
                     }
-                    Button("Home") {
-                        playViewModel.nextNote()
+                    
+                    Button {
+                        pilot.popTo(.Home)
+                    } label: {
+                        Image(systemName: "music.note.house.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geometry.size.width / 12)
+                            .foregroundColor(.black)
                     }
+                    
                 }
+                .padding(.top, 15)
                 //                    VStack {
                 //                        Text("Start Time: \(startTimeInMs)")
                 //                        Text("Elapsed Time: \(timeElapsedInMs)")
                 //                    }
             }
+            .navigationBarHidden(true)
             .padding(.horizontal)
             .padding(.bottom, 1)
             .onAppear() {
@@ -193,6 +228,12 @@ struct PlayView: View {
             })
             
             .onChange(of: playViewModel.currentNoteIndex, perform: { newValue in
+                // Check for final index
+                if newValue == playViewModel.noteInfo.count-6 {
+                    showPopUp = true
+                    scrollDisabled = false
+                }
+                scored = false
                 isPlaying.toggle()
                 notePosition = guitar.findChordPositions(key: playViewModel.currentKey,
                                                          suffix: playViewModel.currentSuffix)[0]
@@ -202,11 +243,17 @@ struct PlayView: View {
                     playViewModel.compareCurrentNote(receivedNote: conductor.data.noteNameWithSharps)
                     playViewModel.getReceivedNoteColor(isPlaying: isPlaying, receivedNote: conductor.data.noteNameWithSharps)
                     
-                    if playViewModel.textColor == Color.red {
-                        misplay += 1
+                    if playViewModel.currentNoteIndex != -1 {
+                        playViewModel.textColors[playViewModel.currentNoteIndex] = playViewModel.textColor
                     }
-                    else if playViewModel.textColor == Color.green {
+                    
+                    if playViewModel.textColor == Color.red && scored == false {
+                        misplay += 1
+                        scored = true
+                    }
+                    else if playViewModel.textColor == Color.green && scored == false {
                         correct += 1
+                        scored = true
                     }
                 }
             })
@@ -216,8 +263,55 @@ struct PlayView: View {
                 midiTrackViewModel.stopEngine()
             })
             .environmentObject(midiTrackViewModel)
+            .popup(isPresented: $showPopUp) {
+                VStack {
+                    Text("Congratulasions!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    Text("You finished the song.")
+                        .font(.title2)
+                        .bold()
+                        .padding(.bottom)
+                    
+                    Text("Correct Play Count")
+                        .font(.title3)
+                        .underline()
+                        .bold()
+                    Text("\(correct)")
+                        .padding(.bottom, 5)
+                    
+                    Text("Misplayed")
+                        .font(.title3)
+                        .underline()
+                        .bold()
+                    
+                    Text("\(misplay)")
+                    
+                    Text("Now you can play the same song again by pressing the reset button, go home and select a new song to play or analyze the notes to see which notes you have played wrong. Scroll feature is now enabled for notes.")
+                        .font(.system(size: geometry.size.width / 25))
+                        .padding()
+                        .multilineTextAlignment(.center)
+                    
+                    Spacer()
+                    Text("To close this window tap outside.")
+                        .font(.caption)
+                    Spacer()
+                }
+                .frame(width: geometry.size.width / 1.2, height: geometry.size.height / 1.6)
+                .background(Color.mint)
+                .cornerRadius(30.0)
+                .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(.black, lineWidth: 6)
+                )
+                    
+            } customize: {
+                $0.closeOnTapOutside(true)
+            }
         }
-        .navigationBarBackButtonHidden(true)
+        .blur(radius: showPopUp ? 10 : 0)
     }
     
     
@@ -242,14 +336,14 @@ struct SongNameView: View {
     }
 }
 
-struct PauseButtonView: View {
+struct ResetButtonView: View {
     let dimensions = 20.0
     
     var body: some View {
         Button {
             print("Edit button was tapped")
         } label: {
-            Image(systemName: "pause.fill")
+            Image(systemName: "restart.circle.fill")
                 .resizable()
                 .frame(width: dimensions, height: dimensions)
                 .foregroundColor(.black)

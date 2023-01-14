@@ -16,17 +16,20 @@ class PlayViewModel: ObservableObject {
     @Published var currentKey: String = "C"
     @Published var currentSuffix: String = "6"
     @Published var currentNoteIndex: Int = -1
-    @Published var textColor:  Color = Color.black
-    
+    @Published var textColors = [Color]()
+    @Published var textColor: Color = Color.black
+    private var mistakeCount: Int = 0
+    private var mistakeLimit: Int = 20
+
     func fetchSongNotes(for fileURL: URL?, track: Int) {
         if let url = fileURL {
             let midiFile   = MIDIFile(url: url)
             let trackNoteMap = MIDIFileTrackNoteMap(midiFile: midiFile, trackNumber: track)
             
             
-            debugPrint("division: \(midiFile.timeDivision)")
-            debugPrint("ticksperframe: \(midiFile.ticksPerFrame ?? 0)")
-            debugPrint("ticksperbeat: \(midiFile.ticksPerBeat ?? 0)")
+            //debugPrint("division: \(midiFile.timeDivision)")
+            //debugPrint("ticksperframe: \(midiFile.ticksPerFrame ?? 0)")
+            //debugPrint("ticksperbeat: \(midiFile.ticksPerBeat ?? 0)")
             
             
             
@@ -36,7 +39,10 @@ class PlayViewModel: ObservableObject {
             //nextNote()
             
             (0 ..< songNotes.count).forEach { index in
-                noteInfo.append(NoteInfo(id: index, note: songNotes[index], noteName: noteNumberToNoteName(for: songNotes[index].noteNumber)))
+                noteInfo.append(NoteInfo(id: index,
+                                         note: songNotes[index],
+                                         noteName: noteNumberToNoteName(for: songNotes[index].noteNumber), color: Color.gray))
+                textColors.append(Color.gray)
             }
         }
     }
@@ -63,6 +69,12 @@ class PlayViewModel: ObservableObject {
     func compareCurrentNote(receivedNote: String) {
         if currentNote == receivedNote {
             nextNote()
+            textColor = Color.green
+        }
+        else if mistakeCount == mistakeLimit {
+            nextNote()
+            mistakeCount = 0
+            textColor = Color.red
         }
     }
 
@@ -104,11 +116,8 @@ class PlayViewModel: ObservableObject {
         if isPlaying == true {
             return textColor = Color.gray
         }
-        if receivedNote == currentNote {
-            return textColor = Color.green
-        }
-        else {
-            return textColor = Color.red
+        else if mistakeCount < mistakeLimit {
+            return mistakeCount += 1
         }
     }
 }

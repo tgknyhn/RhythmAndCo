@@ -21,6 +21,9 @@
 		B17743D02966113F00193632 /* AudioRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17743CF2966113F00193632 /* AudioRecognition.swift */; };
 		B17743D32966125300193632 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = B17743D22966125300193632 /* SoundpipeAudioKit */; };
 		B184A958296E236E005F371E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B184A957296E236E005F371E /* HomeViewModel.swift */; };
+		B19382ED2972EBC100CED7BF /* UIPilot in Frameworks */ = {isa = PBXBuildFile; productRef = B19382EC2972EBC100CED7BF /* UIPilot */; };
+		B19382EF2972EDF600CED7BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19382EE2972EDF600CED7BF /* ContentView.swift */; };
+		B19382F42972F75100CED7BF /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = B19382F32972F75100CED7BF /* PopupView */; };
 		B1AC17D2296719900017CA2C /* AudioKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = B1AC17D1296719900017CA2C /* AudioKitUI */; };
 		B1AC17D4296767CF0017CA2C /* arctic.mid in Resources */ = {isa = PBXBuildFile; fileRef = B1AC17D3296767CF0017CA2C /* arctic.mid */; };
 		B1C53B5E296831E80009CA74 /* GuitarboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C53B5D296831E80009CA74 /* GuitarboardView.swift */; };
@@ -49,6 +52,7 @@
 		B17743CF2966113F00193632 /* AudioRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecognition.swift; sourceTree = "<group>"; };
 		B17743D42966147D00193632 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B184A957296E236E005F371E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		B19382EE2972EDF600CED7BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B1AC17D3296767CF0017CA2C /* arctic.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = arctic.mid; sourceTree = "<group>"; };
 		B1C53B5D296831E80009CA74 /* GuitarboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuitarboardView.swift; sourceTree = "<group>"; };
 		B1C53B60296832D50009CA74 /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
@@ -65,10 +69,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B19382F42972F75100CED7BF /* PopupView in Frameworks */,
 				B1FEDF6D295EF8C000DDA758 /* Fretboard in Frameworks */,
 				B15126D8295B93E9003D2840 /* AudioKit in Frameworks */,
 				B1AC17D2296719900017CA2C /* AudioKitUI in Frameworks */,
 				B17743D32966125300193632 /* SoundpipeAudioKit in Frameworks */,
+				B19382ED2972EBC100CED7BF /* UIPilot in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				B15126B4295B8E9E003D2840 /* RhythmAndCoApp.swift */,
+				B19382EE2972EDF600CED7BF /* ContentView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -221,6 +228,8 @@
 				B1FEDF6C295EF8C000DDA758 /* Fretboard */,
 				B17743D22966125300193632 /* SoundpipeAudioKit */,
 				B1AC17D1296719900017CA2C /* AudioKitUI */,
+				B19382EC2972EBC100CED7BF /* UIPilot */,
+				B19382F32972F75100CED7BF /* PopupView */,
 			);
 			productName = RhythmAndCo;
 			productReference = B15126B1295B8E9E003D2840 /* RhythmAndCo.app */;
@@ -255,6 +264,8 @@
 				B1FEDF6B295EF8C000DDA758 /* XCRemoteSwiftPackageReference "Fretboard" */,
 				B17743D12966125300193632 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
 				B1AC17D0296719900017CA2C /* XCRemoteSwiftPackageReference "AudioKitUI" */,
+				B19382EB2972EBC100CED7BF /* XCRemoteSwiftPackageReference "UIPilot" */,
+				B19382F22972F75100CED7BF /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = B15126B2295B8E9E003D2840 /* Products */;
 			projectDirPath = "";
@@ -290,6 +301,7 @@
 			files = (
 				B17743D02966113F00193632 /* AudioRecognition.swift in Sources */,
 				B1F7FF29295B9F8900E764C1 /* PlayViewModel.swift in Sources */,
+				B19382EF2972EDF600CED7BF /* ContentView.swift in Sources */,
 				B1C53B5E296831E80009CA74 /* GuitarboardView.swift in Sources */,
 				B1F7FF2B295BA56500E764C1 /* NoteSyntax.swift in Sources */,
 				B15126CE295B9304003D2840 /* PlayView.swift in Sources */,
@@ -525,6 +537,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		B19382EB2972EBC100CED7BF /* XCRemoteSwiftPackageReference "UIPilot" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/canopas/UIPilot.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		B19382F22972F75100CED7BF /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		B1AC17D0296719900017CA2C /* XCRemoteSwiftPackageReference "AudioKitUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/AudioKitUI.git";
@@ -553,6 +581,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B17743D12966125300193632 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */;
 			productName = SoundpipeAudioKit;
+		};
+		B19382EC2972EBC100CED7BF /* UIPilot */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B19382EB2972EBC100CED7BF /* XCRemoteSwiftPackageReference "UIPilot" */;
+			productName = UIPilot;
+		};
+		B19382F32972F75100CED7BF /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B19382F22972F75100CED7BF /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 		B1AC17D1296719900017CA2C /* AudioKitUI */ = {
 			isa = XCSwiftPackageProductDependency;

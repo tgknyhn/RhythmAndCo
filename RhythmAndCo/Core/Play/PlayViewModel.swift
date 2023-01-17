@@ -19,7 +19,7 @@ class PlayViewModel: ObservableObject {
     @Published var textColors = [Color]()
     @Published var textColor: Color = Color.black
     private var mistakeCount: Int = 0
-    private var mistakeLimit: Int = 20
+    private var mistakeLimit: Int = 6
 
     func fetchSongNotes(for fileURL: URL?, track: Int) {
         if let url = fileURL {
@@ -69,6 +69,7 @@ class PlayViewModel: ObservableObject {
     func compareCurrentNote(receivedNote: String) {
         if currentNote == receivedNote {
             nextNote()
+            mistakeCount = 0
             textColor = Color.green
         }
         else if mistakeCount == mistakeLimit {
@@ -94,7 +95,6 @@ class PlayViewModel: ObservableObject {
         // Lastly, we get note name from Notes model
         let noteName = allNotes.getNote(for: noteNumber % 12)
         // return the result
-        print("noteNo: \(note) | noteName: \(noteName + String(octave))")
         return noteName + String(octave);
     }
     
@@ -105,11 +105,28 @@ class PlayViewModel: ObservableObject {
             return fileName
         }
         
-        (1...4).forEach { _ in
-            fileName.removeLast()
+        if fileName.hasSuffix(".mid") {
+            (0..<4).forEach { _ in
+                fileName.removeLast()
+            }
+        }
+        else if fileName.hasSuffix(".midi") {
+            (0..<5).forEach { _ in
+                fileName.removeLast()
+            }
+        }
+        else if fileName.hasSuffix(".mid.html") {
+            (0..<9).forEach { _ in
+                fileName.removeLast()
+            }
+        }
+        else if fileName.hasSuffix(".midi.html") {
+            (0..<10).forEach { _ in
+                fileName.removeLast()
+            }
         }
         
-        return fileName.uppercased()
+        return fileName.capitalized
     }
     
     func getReceivedNoteColor(isPlaying: Bool, receivedNote: String) {

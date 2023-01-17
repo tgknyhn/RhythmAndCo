@@ -15,9 +15,9 @@ struct PlayView: View {
     // Routing object
     @EnvironmentObject var pilot: UIPilot<AppRoute>
     // Initializing the viewmodels
-    @StateObject var midiTrackViewModel = MIDITrackViewModel()      // From AudiokitUI
-    @StateObject var conductor = AudioRecognition()                 // From Audiokit
-    @StateObject var playViewModel = PlayViewModel()                // My ViewModel
+    @StateObject var midiTrackViewModel = MyMIDITrackViewModel()      // From AudiokitUI
+    @StateObject var conductor = AudioRecognition()                  // From Audiokit
+    @StateObject var playViewModel = PlayViewModel()                 // My ViewModel
     // Song Information
     @State var fileURL: URL?
     @State var trackIndex: Int = 0
@@ -63,7 +63,7 @@ struct PlayView: View {
                     .padding(.bottom, -10)
                 Spacer(minLength: 40)
                 GameScoreView(correct: correct, misplay: misplay)
-                Spacer(minLength: 30)
+                Spacer(minLength: geometry.size.width / 10)
                 //CurrentNoteView(currentNote: playViewModel.currentNote)
                 MidiTrackView(fileURL: fileURL, trackIndex: trackIndex)
                 HStack(alignment: .top, spacing: 50) {
@@ -83,13 +83,13 @@ struct PlayView: View {
                                 Text("\(conductor.data.noteNameWithSharps)")
                                     .font(.title)
                                     .foregroundColor(playViewModel.textColor)
-                            }.padding(.horizontal, -20)
+                            }.padding(.horizontal, -geometry.size.width / 40)
                         }
 
                         ZStack {
                             ScrollViewReader { proxy in
                                 ScrollView {
-                                    VStack(spacing: 20) {
+                                    VStack(spacing: geometry.size.width / 15) {
                                         Text("-")
                                             .font(.title)
                                             .fontWeight(.bold)
@@ -108,15 +108,16 @@ struct PlayView: View {
                                     }
                                 }
                             }
-                            .padding(.top, 12)
-                            .padding(.bottom, -40)
+                            .padding(.top, geometry.size.width / 30)
+                            .padding(.bottom, -geometry.size.width / 13)
                             
                             
                             VStack {
                                 Circle().stroke(Color.black,
-                                                style: StrokeStyle(lineWidth: 5,
+                                                style: StrokeStyle(lineWidth: 4,
                                                                    lineCap: .butt,
                                                                    dash: [10,5]))
+                                .frame(width: geometry.size.width / 6.5)
                                 Spacer()
                             }
                         }
@@ -202,11 +203,12 @@ struct PlayView: View {
                 }
             }
             .onTapGesture {
-                //isPlaying.toggle()
+                playViewModel.nextNote()
             }
             .onReceive(timer, perform: { _ in
+
                 if playViewModel.currentNoteIndex != -1 {
-                    startTimeInMs = playViewModel.noteInfo[playViewModel.currentNoteIndex].note.noteStartTime * 1_000_000 / 3.05
+                    startTimeInMs = playViewModel.noteInfo[playViewModel.currentNoteIndex].note.noteStartTime * 1_000_000 / (midiTrackViewModel.lastTempo / 28.805)
                 }
                 
                 if isPlaying == true {
@@ -239,20 +241,21 @@ struct PlayView: View {
                                                          suffix: playViewModel.currentSuffix)[0]
             })
             .onChange(of: conductor.data.pitch, perform: { note in
-                if isPlaying == false {
-                    playViewModel.compareCurrentNote(receivedNote: conductor.data.noteNameWithSharps)
-                    playViewModel.getReceivedNoteColor(isPlaying: isPlaying, receivedNote: conductor.data.noteNameWithSharps)
-                    
-                    if playViewModel.currentNoteIndex != -1 {
-                        playViewModel.textColors[playViewModel.currentNoteIndex] = playViewModel.textColor
+                if gameStarted == true {
+                    if isPlaying == false {
+                        playViewModel.compareCurrentNote(receivedNote: conductor.data.noteNameWithSharps)
+                        playViewModel.getReceivedNoteColor(isPlaying: isPlaying, receivedNote: conductor.data.noteNameWithSharps)
+                        
+                        if playViewModel.currentNoteIndex != -1 {
+                            playViewModel.textColors[playViewModel.currentNoteIndex] = playViewModel.textColor
+                        }
+                        if playViewModel.textColor == Color.green && scored == false {
+                            correct += 1
+                            scored = true
+                        }
                     }
-                    
                     if playViewModel.textColor == Color.red && scored == false {
                         misplay += 1
-                        scored = true
-                    }
-                    else if playViewModel.textColor == Color.green && scored == false {
-                        correct += 1
                         scored = true
                     }
                 }
@@ -265,7 +268,7 @@ struct PlayView: View {
             .environmentObject(midiTrackViewModel)
             .popup(isPresented: $showPopUp) {
                 VStack {
-                    Text("Congratulasions!")
+                    Text("Congratulations!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding()
@@ -289,7 +292,7 @@ struct PlayView: View {
                     
                     Text("\(misplay)")
                     
-                    Text("Now you can play the same song again by pressing the reset button, go home and select a new song to play or analyze the notes to see which notes you have played wrong. Scroll feature is now enabled for notes.")
+                    Text("Now, you can play the same song again by pressing the reset button, or go home and select a new song to play. You can also analyze the notes to see which ones you have played incorrectly. The scroll feature is now enabled for notes.")
                         .font(.system(size: geometry.size.width / 25))
                         .padding()
                         .multilineTextAlignment(.center)
@@ -321,7 +324,7 @@ struct PlayView: View {
 
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayView(fileName: "arctic", trackIndex: 0)
+        PlayView(fileName: "Demo", trackIndex: 0)
     }
 }
     
@@ -333,21 +336,6 @@ struct SongNameView: View {
         Text(songName)
             .font(.title)
             .fontWeight(.bold)
-    }
-}
-
-struct ResetButtonView: View {
-    let dimensions = 20.0
-    
-    var body: some View {
-        Button {
-            print("Edit button was tapped")
-        } label: {
-            Image(systemName: "restart.circle.fill")
-                .resizable()
-                .frame(width: dimensions, height: dimensions)
-                .foregroundColor(.black)
-        }
     }
 }
 
@@ -401,10 +389,10 @@ struct MidiTrackView: View {
     var body: some View {
         GeometryReader { geometry in
             if let _ = fileURL {
-                MIDITrackView(fileURL: $fileURL,
+                MyMIDITrackView(fileURL: $fileURL,
                               trackNumber: trackIndex,
                               trackWidth: geometry.size.width,
-                              trackHeight: 200)
+                              trackHeight: geometry.size.height / 1.1)
                 .background(Color.primary)
                 .cornerRadius(10.0)
                 

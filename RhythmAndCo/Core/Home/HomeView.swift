@@ -51,8 +51,11 @@ struct HomeView: View {
                     .fileImporter(isPresented: $showActionSheet, allowedContentTypes: [.data]) { (res) in
                         do {
                             try fileURL = res.get()
+                            _ = fileURL?.startAccessingSecurityScopedResource()
                             homeViewModel.fetchTracks(for: fileURL)
+                            //print("\(fileURL?.description ?? "aa")")
                             fileName = fileURL?.lastPathComponent ?? "Error occured while getting file name."
+                            trackIndex = -1
                         } catch {
                             fileName = "Couldn't find the file."
                         }
@@ -97,7 +100,9 @@ struct HomeView: View {
                                 Button {
                                     trackIndex = index
                                 } label: {
+                                    
                                     Text("Track \(index+1): \(homeViewModel.tracks[index].name ?? "no name")") +
+                                    Text("\nNote Count: \(homeViewModel.tracks[index].events.count)")
                                     Text("\nNote Count: \(homeViewModel.tracks[index].events.count)")
                                 }
                             }
@@ -157,9 +162,6 @@ struct HomeView: View {
 
             }
             .padding()
-            .onChange(of: fileName) { _ in
-                print("count: \(homeViewModel.tracks.count)")
-            }
         }.navigationBarHidden(true)
     }
         

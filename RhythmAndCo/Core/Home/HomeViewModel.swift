@@ -15,6 +15,11 @@ class HomeViewModel: ObservableObject {
         if let url = fileURL {
             let midiFile   = MIDIFile(url: url)
             tracks = midiFile.tracks
+//            print(tracks[0].length)
+//            print(tracks[0].channelEvents.count / tracks[0].metaEvents.count)
+//            print(tracks[0].channelEvents.count)
+//            print(tracks[0].metaEvents.count)
+//            print(tracks[0].events.count)
         }
     }
     

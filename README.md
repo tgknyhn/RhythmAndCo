@@ -13,7 +13,7 @@
 
 I like playing guitar but sometimes I am having rough time learning tracks using tabletures. Tabs are quite helpful if you don't know musical note notation however it lacks some important information about a note such as how long you need to play it. <br>
 
-So I decided developing Rhythm & Co. It is also my first graduation project at Gebze Technical University. I developed it using Swift and SwiftUI. <br>
+Because of that, I decided developing Rhythm & Co. It is also my first graduation project at Gebze Technical University. I developed it using Swift and SwiftUI. <br>
 
 <h1>Features</h1>
 
@@ -44,4 +44,8 @@ So I decided developing Rhythm & Co. It is also my first graduation project at G
 
 ---
 
-<h1 align="center"> Importing a Song </h1> 
+<h1> Home Screen </h1>
+
+<h1> Play Screen </h1>
+
+

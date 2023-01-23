@@ -11,9 +11,9 @@
 
 <h1>Origin</h1>
 
-I like playing guitar and sometimes I am having rough time learning tracks using tabletures. Tabs are quite helpful if you don't know musical note notation but it lacks some important information about a note such as how long you need to play it. <br>
+I like playing guitar but sometimes I am having rough time learning tracks using tabletures. Tabs are quite helpful if you don't know musical note notation however it lacks some important information about a note such as how long you need to play it. <br>
 
-So I decided developing Rhythm & Co. It is also my first graduation project. I developed it using Swift and SwiftUI. <br>
+So I decided developing Rhythm & Co. It is also my first graduation project at Gebze Technical University. I developed it using Swift and SwiftUI. <br>
 
 <h1>Features</h1>
 
@@ -42,4 +42,6 @@ So I decided developing Rhythm & Co. It is also my first graduation project. I d
 * [MIDI Icon](https://www.flaticon.com/free-icon/mid_5105415)
 * [Track Icon](https://www.flaticon.com/free-icon/music-album_1012931)
 
+---
 
+<h1 align="center"> Importing a Song </h1> 

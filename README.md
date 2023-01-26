@@ -15,18 +15,21 @@ I like playing guitar but sometimes I am having rough time learning tracks using
 
 Because of that, I decided developing Rhythm & Co. It is also my first graduation project at Gebze Technical University. I developed it using Swift and SwiftUI. <br>
 
+If you are interested with the details of the project, you may want to read my [graduation project report](https://github.com/tgknyhn/GTU/blob/main/Cse495/Graduation%20Project%20Report.pdf).
+
+Also, I uploaded a Demo play to the Youtube. It is public and you can watch it from [here](https://youtu.be/t0z5uf2Mu-E). 
+
 <h1>Features</h1>
 
-* Importing a MIDI file
-* Selecting a track of imported song
-* Start/Pause/Reset buttons
-* Home button to select a new song or track
-* Checking where to press on guitar to create current note sound using fretboard view.
-* Checking how long a note need to be pressed using MIDI Sequencer
-* Seeing musical note representation of your (guitar's) voice. 
-* Real-time comparison between your voice and note needs to be played at that moment.
-* Checking which notes you've played wrong at the end of the track.
-* Checking how many correct and incorrect notes you've played in real-time.
+* Import function (for MIDI files)
+* Select track button (for the tracks inside a MIDI file)
+* Start/Pause/Reset/Home buttons
+* Fretboard view (to see where to press on guitar in order to play correct note)
+* Note duration view (MIDI Sequencer)
+* Musical note representation of microphone input.
+* Real-time note comparison between the microphone input and the note needs to be played.
+* Scrollable scroll view after finishing the song (to see correct and incorrect plays) -disabled during song-
+* Real-time correct/incorrect count view.
 
 
 <h1>Libraries</h1>
@@ -45,6 +48,9 @@ Because of that, I decided developing Rhythm & Co. It is also my first graduatio
 ---
 
 <h1> Home Screen </h1>
+
+<img src="Images/appScreenshot_home.png" width="280"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<img src="Images/appGIF_home.gif" width="300"/>
 
 <h1> Play Screen </h1>
 

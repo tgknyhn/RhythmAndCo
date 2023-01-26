@@ -11,7 +11,7 @@
 
 <h1>Origin</h1>
 
-I like playing guitar but sometimes I am having rough time learning tracks using tabletures. Tabs are quite helpful if you don't know musical note notation however it lacks some important information about a note such as how long you need to play it. <br>
+I like playing guitar but sometimes I am having rough time learning tracks using tabletures. Tabs are quite helpful if you don't know musical notation however it lacks some important information about a note such as how long you need to play it. <br>
 
 Because of that, I decided developing Rhythm & Co. It is also my first graduation project at Gebze Technical University. I developed it using Swift and SwiftUI. <br>
 
